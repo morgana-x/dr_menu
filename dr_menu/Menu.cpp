@@ -35,6 +35,8 @@ int hudEnableChapterTimeOfDay = 0;
 int hudEnableChapterChapter = 1;
 int hudEnableChapterAnim = 1;
 
+int selectedTimeOfDay = 0;
+
 #define IM_MIN(A, B)            (((A) < (B)) ? (A) : (B))
 void Menu::Render()
 {
@@ -92,9 +94,17 @@ void Menu::Render()
             ImGui::PopItemWidth();
             if (oldmonocoins != monocoins)
                 *DrValues::Dr1::Game::Monocoins = monocoins;
+           
+            selectedTimeOfDay = (int)DrValues::Dr1::Game::State->TimeOfDay;
+            oldmonocoins = selectedTimeOfDay;
+            ImGui::Text("GameData::State->TimeOfDay =");
+            ImGui::SameLine();
+            ImGui::PushItemWidth(80);
+            ImGui::SliderInt("##GameDataStateTimeOfDay", &selectedTimeOfDay, 0, 4);
+            ImGui::PopItemWidth();
+            if (oldmonocoins != selectedTimeOfDay)
+                DrValues::Dr1::Game::State->TimeOfDay = (short)selectedTimeOfDay;
 
-            // Appears to be the save data state or something, at least, these are not the actual values the game uses for actual logic
-            ImGui::Text("GameData::State->TimeOfDay = %i", DrValues::Dr1::Game::State->TimeOfDay);
             ImGui::Text("GameData::State->SkillPoints = %i", DrValues::Dr1::Game::State->SkillPoints);
             ImGui::Text("GameData::State->UnlockedRulePages = %i", DrValues::Dr1::Game::State->UnlockedRulePages);
             ImGui::Text("GameData::State->ActionDifficulty = %i", DrValues::Dr1::Game::State->ActionDifficulty);
@@ -246,8 +256,7 @@ void Menu::Render()
             ImGui::SliderInt("DoAnim##EnableChapter", &hudEnableChapterAnim, 0, 1);
             ImGui::PopItemWidth();
             ImGui::SameLine();
-            ImGui::Text(")");
-        
+            ImGui::Text(")");        
         }
         if (ImGui::CollapsingHeader("Debug"))
         {
