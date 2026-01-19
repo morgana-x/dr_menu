@@ -72,5 +72,16 @@ namespace DrFuncs
 		namespace Game
 		{
 		}
+
+		namespace Audio
+		{
+			typedef int PlaySoundFunc(int, unsigned int, int, int, int, int);
+			PlaySoundFunc* PlaySound = (PlaySoundFunc*)(baseAddr + 0x62e70);
+
+			bool PlaySongWrapper(int track, int volume = 100)
+			{
+				return 1 == PlaySound(0, track, volume, 0, 0xffffffff, 0);
+			}
+		}
 	}
 };

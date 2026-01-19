@@ -8,6 +8,8 @@ int selectedMap = 0;
 int selectedMovie = 0;
 int selectedAchievement = 0;
 
+int selectedSong = 0;
+
 int monocoins = 0;
 
 float selectedCamPos[3];
@@ -38,6 +40,8 @@ void Menu::Render()
         if (ImGui::CollapsingHeader("Map"))
         {
             ImGui::Text("Map::CurrentMap = %i", *DrValues::Dr1::Map::CurrentMap);
+            ImGui::Text("Map::Pos = ");
+            ImGui::SameLine();
             ImGui::InputFloat3("Map::Pos", (float*)DrValues::Dr1::Map::Pos);
             if (ImGui::Button("Map::LoadMap("))
                 DrFuncs::Dr1::Map::Load(selectedMap);
@@ -105,6 +109,18 @@ void Menu::Render()
                 DrFuncs::Dr1::Script::LoadAndRun(0, selectedScript[0], selectedScript[1], selectedScript[2]);
             ImGui::SameLine();
             ImGui::InputInt3("Script", selectedScript);
+            ImGui::SameLine();
+            ImGui::Text(")");
+        }
+        
+        if (ImGui::CollapsingHeader("Audio"))
+        {
+            ImGui::Text("Audio::CurrentSong = %i", *DrValues::Dr1::Audio::CurrentSong);
+
+            if (ImGui::Button("Audio::PlaySong("))
+                DrFuncs::Dr1::Audio::PlaySongWrapper(selectedSong);
+            ImGui::SameLine();
+            ImGui::InputInt("SongId", &selectedSong);
             ImGui::SameLine();
             ImGui::Text(")");
         }

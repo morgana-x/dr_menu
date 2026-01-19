@@ -66,5 +66,10 @@ namespace DrValues
 
 			unsigned short* Monocoins = (unsigned short*)(baseAddr + 0x2e47c8);
 		}
+
+		namespace Audio
+		{
+			unsigned short* CurrentSong = (unsigned short*)(baseAddr + 0x295da0);
+		}
 	}
 };
