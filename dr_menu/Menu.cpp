@@ -26,6 +26,7 @@ int loadStandSelectedEmote = 0;
 
 int spawnCharSelectedChar = 0;
 int spawnCharSelectedEmote = 0;
+int charTeleportSelectedChar = 0;
 
 float selectedFov = 45;
 
@@ -193,6 +194,15 @@ void Menu::Render()
             ImGui::SameLine();
             ImGui::PushItemWidth(170);
             ImGui::InputFloat3("pos##charsetPosPos", charSetPosSelectedPos);
+            ImGui::PopItemWidth();
+            ImGui::SameLine();
+            ImGui::Text(")");
+             
+            if (ImGui::Button("Character::TeleportToPlayer("))
+                DrFuncs::Dr1::Character::SetPos(charTeleportSelectedChar, DrValues::Dr1::Player::Pos->x, DrValues::Dr1::Player::Pos->y, DrValues::Dr1::Player::Pos->z);
+            ImGui::SameLine();
+            ImGui::PushItemWidth(80);
+            ImGui::InputInt("##charTeleportCharID", &charTeleportSelectedChar);
             ImGui::PopItemWidth();
             ImGui::SameLine();
             ImGui::Text(")");
