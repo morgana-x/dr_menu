@@ -71,5 +71,16 @@ namespace DrValues
 		{
 			unsigned short* CurrentSong = (unsigned short*)(baseAddr + 0x295da0);
 		}
+
+		namespace Debug
+		{
+			unsigned char* SelectedMenu = (unsigned char*)(baseAddr + 0x2a84b0);
+		}
+
+		namespace Minimap
+		{
+			unsigned char* Toggled = (unsigned char*)(baseAddr + 0x33c689);
+			short* Transperancy = (short*)(baseAddr + 0x33c68e);
+		}
 	}
 };

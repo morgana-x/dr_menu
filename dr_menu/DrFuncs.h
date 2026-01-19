@@ -53,6 +53,12 @@ namespace DrFuncs
 
 			typedef void LoadStandFunc(int, int);
 			LoadStandFunc* LoadStand = (LoadStandFunc*)(baseAddr + 0x22b30);
+
+			typedef void SetPosFunc(unsigned int, float, float, float);
+			SetPosFunc* SetPos = (SetPosFunc*)(baseAddr + 0x23200);
+
+			typedef void SpawnCharFunc(unsigned int, char);
+			SpawnCharFunc* SpawnChar = (SpawnCharFunc*)(baseAddr + 0x22840);
 		}
 
 		namespace Script
@@ -63,7 +69,7 @@ namespace DrFuncs
 			typedef void LoadScriptFunc(int, int, int, int);
 			LoadScriptFunc* LoadAndRun = (LoadScriptFunc*)(baseAddr + 0x4bf30);
 
-			void LoadAndRunSimple(int chapter, int scene, int variant)
+			void LoadAndRunWrapper(int chapter, int scene, int variant)
 			{
 				LoadAndRun(0, chapter, scene, variant);
 			}
@@ -82,6 +88,12 @@ namespace DrFuncs
 			{
 				return 1 == PlaySound(0, track, volume, 0, 0xffffffff, 0);
 			}
+		}
+
+		namespace Debug
+		{
+			typedef void EnableDebugMenuFunc();
+			EnableDebugMenuFunc* EnableDebugMenu = (EnableDebugMenuFunc*)(baseAddr + 0x2c3a0);
 		}
 	}
 };
