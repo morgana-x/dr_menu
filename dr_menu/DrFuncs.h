@@ -35,7 +35,7 @@ namespace DrFuncs
 			typedef void MovieLoadFunc(int);
 			MovieLoadFunc* Load = (MovieLoadFunc*)(baseAddr + 0xd65c0);
 		}
-		
+
 		namespace Achievement
 		{
 			typedef void UnlockAchievementFunc(int);
@@ -104,5 +104,5 @@ namespace DrFuncs
 			typedef void SetEnabledFunc(char);
 			SetEnabledFunc* SetEnabled = (SetEnabledFunc*)(baseAddr + 0x41080);
 		}
-	}}
+	}
 };

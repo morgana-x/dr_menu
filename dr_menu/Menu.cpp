@@ -29,6 +29,7 @@ int spawnCharSelectedEmote = 0;
 
 float selectedFov = 45;
 
+
 #define IM_MIN(A, B)            (((A) < (B)) ? (A) : (B))
 void Menu::Render()
 {
@@ -86,6 +87,13 @@ void Menu::Render()
             ImGui::PopItemWidth();
             if (oldmonocoins != monocoins)
                 *DrValues::Dr1::Game::Monocoins = monocoins;
+
+            // Appears to be the save data state or something, at least, these are not the actual values the game uses for actual logic
+            ImGui::Text("GameData::State->TimeOfDay = %i", DrValues::Dr1::Game::State->TimeOfDay);
+            ImGui::Text("GameData::State->SkillPoints = %i", DrValues::Dr1::Game::State->SkillPoints);
+            ImGui::Text("GameData::State->UnlockedRulePages = %i", DrValues::Dr1::Game::State->UnlockedRulePages);
+            ImGui::Text("GameData::State->ActionDifficulty = %i", DrValues::Dr1::Game::State->ActionDifficulty);
+            ImGui::Text("GameData::State->LogicDifficulty = %i", DrValues::Dr1::Game::State->LogicDifficulty);
         }
 
         /*
@@ -196,7 +204,7 @@ void Menu::Render()
             ImGui::Text("Camera::Rot = %f, %f, %f", DrValues::Dr1::Camera::Rot->x, DrValues::Dr1::Camera::Rot->y, *DrValues::Dr1::Camera::Rot_Up);
 
             selectedFov = (float)*DrValues::Dr1::Camera::Fov;
-            int oldfov = selectedFov;
+            float oldfov = selectedFov;
             ImGui::Text("Camera::Fov = ");
             ImGui::SameLine();
             ImGui::PushItemWidth(85);
