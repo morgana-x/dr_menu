@@ -28,7 +28,7 @@ namespace DrValues
 
 			float* Rot_Up = (float*)(baseAddr + 0x2a5df8);
 
-			float* FovY = (float*)(baseAddr + 0x2a5df4);
+			float* Fov = (float*)(baseAddr + 0x2a5df4);
 		}
 
 		namespace Movie

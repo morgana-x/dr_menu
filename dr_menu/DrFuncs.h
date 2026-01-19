@@ -25,6 +25,9 @@ namespace DrFuncs
 
 			typedef void CameraSetYaw(float);
 			CameraSetYaw* SetYaw = (CameraSetYaw*)(baseAddr + 0x1e9c0);
+
+			typedef void CameraSetFov(float);
+			CameraSetFov* SetFov = (CameraSetFov*)(baseAddr + 0x1e740);
 		}
 
 		namespace Movie
@@ -95,5 +98,11 @@ namespace DrFuncs
 			typedef void EnableDebugMenuFunc();
 			EnableDebugMenuFunc* EnableDebugMenu = (EnableDebugMenuFunc*)(baseAddr + 0x2c3a0);
 		}
-	}
+
+		namespace Minimap
+		{
+			typedef void SetEnabledFunc(char);
+			SetEnabledFunc* SetEnabled = (SetEnabledFunc*)(baseAddr + 0x41080);
+		}
+	}}
 };

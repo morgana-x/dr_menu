@@ -27,6 +27,8 @@ int loadStandSelectedEmote = 0;
 int spawnCharSelectedChar = 0;
 int spawnCharSelectedEmote = 0;
 
+float selectedFov = 45;
+
 #define IM_MIN(A, B)            (((A) < (B)) ? (A) : (B))
 void Menu::Render()
 {
@@ -60,8 +62,8 @@ void Menu::Render()
             ImGui::PopItemWidth();
         }
 
-       
-        if (ImGui::CollapsingHeader("Movie"))
+       // Movie Func causes crash
+       /* if (ImGui::CollapsingHeader("Movie"))
         {
             if (ImGui::Button("Movie::LoadMovie("))
                 DrFuncs::Dr1::Movie::Load(selectedMovie);
@@ -71,7 +73,7 @@ void Menu::Render()
             ImGui::PopItemWidth();
             ImGui::SameLine();
             ImGui::Text(")");
-        }
+        }*/
 
         if (ImGui::CollapsingHeader("Game Data"))
         {
@@ -186,6 +188,22 @@ void Menu::Render()
             ImGui::PopItemWidth();
             ImGui::SameLine();
             ImGui::Text(")");
+        }
+
+        if (ImGui::CollapsingHeader("Camera"))
+        {
+            ImGui::Text("Camera::Pos = %f, %f, %f", DrValues::Dr1::Camera::Pos->x, DrValues::Dr1::Camera::Pos->y, DrValues::Dr1::Camera::Pos->z);
+            ImGui::Text("Camera::Rot = %f, %f, %f", DrValues::Dr1::Camera::Rot->x, DrValues::Dr1::Camera::Rot->y, *DrValues::Dr1::Camera::Rot_Up);
+
+            selectedFov = (float)*DrValues::Dr1::Camera::Fov;
+            int oldfov = selectedFov;
+            ImGui::Text("Camera::Fov = ");
+            ImGui::SameLine();
+            ImGui::PushItemWidth(85);
+            ImGui::InputFloat("##CamFov", &selectedFov);
+            ImGui::PopItemWidth();
+            if (oldfov != selectedFov)
+                DrFuncs::Dr1::Camera::SetFov(selectedFov);
         }
 
         if (ImGui::CollapsingHeader("Debug"))
