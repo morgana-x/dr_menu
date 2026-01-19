@@ -1,20 +1,9 @@
 // dllmain.cpp : Defines the entry point for the DLL application.
 #include "pch.h"
-#include "DrValues.h"
-#include "DrFuncs.h"
-#include <iostream>
-void init()
-{
-    AllocConsole();
-    FILE* fDummy;
-    freopen_s(&fDummy, "CONIN$", "r", stdin);
-    freopen_s(&fDummy, "CONOUT$", "w", stderr);
-    freopen_s(&fDummy, "CONOUT$", "w", stdout);
+#include "Draw.hpp"
 
-    std::cout << *DrValues::Dr1::Map::CurrentMap << "\n";
-    DrFuncs::Dr1::Map::Load(1);
-    std::cout << *DrValues::Dr1::Map::CurrentMap << "\n";
-}
+HANDLE hCurrentUIThread = nullptr;
+
 
 BOOL APIENTRY DllMain( HMODULE hModule,
                        DWORD  ul_reason_for_call,
@@ -24,15 +13,19 @@ BOOL APIENTRY DllMain( HMODULE hModule,
     switch (ul_reason_for_call)
     {
     case DLL_PROCESS_ATTACH:
-        break;
-    case DLL_THREAD_ATTACH:
-        init();
-        break;
-    case DLL_THREAD_DETACH:
+        DisableThreadLibraryCalls(hModule);
+     //   Draw::hCurrentModule = hModule;
+        hCurrentUIThread = CreateThread(nullptr, NULL, (LPTHREAD_START_ROUTINE)Draw::Init, nullptr, NULL, nullptr);
         break;
     case DLL_PROCESS_DETACH:
+        TerminateThread(hCurrentUIThread, 0);
         break;
     }
     return TRUE;
 }
 
+int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPWSTR lpCmdLine, _In_ int nShowCmd)
+{
+    Draw::Init();
+    return 0;
+}

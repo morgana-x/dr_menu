@@ -1,0 +1,4 @@
+namespace Draw
+{
+	void Init();
+}

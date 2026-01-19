@@ -55,7 +55,7 @@ namespace DrValues
 
 		namespace Script
 		{
-			short* Speaker = (short*)(baseAddr + 0x33ea44);
+		//	short* Speaker = (short*)(baseAddr + 0x33ea44);
 
 			DrTypes::ScriptId* ScriptId = (DrTypes::ScriptId*)(baseAddr + 0x2e4666);
 		}
@@ -63,6 +63,8 @@ namespace DrValues
 		namespace Game
 		{
 			DrTypes::Dr1::GameState* State = (DrTypes::Dr1::GameState*)(baseAddr + 0x2e47a8);
+
+			unsigned short* Monocoins = (unsigned short*)(baseAddr + 0x2e47c8);
 		}
 	}
 };
