@@ -77,10 +77,21 @@ namespace DrValues
 			unsigned char* SelectedMenu = (unsigned char*)(baseAddr + 0x2a84b0);
 		}
 
-		namespace Minimap
+
+		namespace HUD
 		{
-			unsigned char* Toggled = (unsigned char*)(baseAddr + 0x33c689);
-			short* Transperancy = (short*)(baseAddr + 0x33c68e);
+			char* ChapterState = (char*)(baseAddr + 0x33c3c0);
+			char* InteractPopupState = (char*)(baseAddr + 0x33c3e8);
+			char* HelpIconState = (char*)(baseAddr + 0x33c536);
+			char* ObservingState = (char*)(baseAddr + 0x33c53a);
+
+			int* RadioVisible = (int*)(baseAddr + 0x33cb78);
+
+		}
+
+		namespace Render
+		{
+			char* RenderingEnabled = (char*)(baseAddr + 0x2879ec);
 		}
 	}
 };

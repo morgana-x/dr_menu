@@ -31,6 +31,10 @@ int charTeleportSelectedChar = 0;
 float selectedFov = 45;
 
 
+int hudEnableChapterTimeOfDay = 0;
+int hudEnableChapterChapter = 1;
+int hudEnableChapterAnim = 1;
+
 #define IM_MIN(A, B)            (((A) < (B)) ? (A) : (B))
 void Menu::Render()
 {
@@ -223,7 +227,28 @@ void Menu::Render()
             if (oldfov != selectedFov)
                 DrFuncs::Dr1::Camera::SetFov(selectedFov);
         }
+        if (ImGui::CollapsingHeader("HUD"))
+        {
+            if (ImGui::Button("HUD::ToggleRadio()"))
+                *DrValues::Dr1::HUD::RadioVisible = !(*DrValues::Dr1::HUD::RadioVisible);
 
+            if (ImGui::Button("HUD::HideChapter()"))
+                DrFuncs::Dr1::HUD::HideChapterAnim();
+
+            if (ImGui::Button("HUD::ShowChapter("))
+                DrFuncs::Dr1::HUD::ShowChapter(hudEnableChapterTimeOfDay, (char)hudEnableChapterChapter, (char)hudEnableChapterAnim);
+            ImGui::SameLine();
+            ImGui::PushItemWidth(60);
+            ImGui::SliderInt("TimeDay##EnableChapter", &hudEnableChapterTimeOfDay, 0, 4);
+            ImGui::SameLine();
+            ImGui::SliderInt("Chapter##EnableChapter", &hudEnableChapterChapter, 1, 8);
+            ImGui::SameLine();
+            ImGui::SliderInt("DoAnim##EnableChapter", &hudEnableChapterAnim, 0, 1);
+            ImGui::PopItemWidth();
+            ImGui::SameLine();
+            ImGui::Text(")");
+        
+        }
         if (ImGui::CollapsingHeader("Debug"))
         {
             selectedDebugMenu = (int)*DrValues::Dr1::Debug::SelectedMenu;
@@ -239,6 +264,8 @@ void Menu::Render()
             if (ImGui::Button("Debug::EnableMenu()"))
                 DrFuncs::Dr1::Debug::EnableDebugMenu();
         }
+
+
 
         ImGui::End();
     }

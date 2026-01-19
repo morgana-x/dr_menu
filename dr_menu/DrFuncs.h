@@ -99,10 +99,23 @@ namespace DrFuncs
 			EnableDebugMenuFunc* EnableDebugMenu = (EnableDebugMenuFunc*)(baseAddr + 0x2c3a0);
 		}
 
-		namespace Minimap
+		namespace HUD
 		{
-			typedef void SetEnabledFunc(char);
-			SetEnabledFunc* SetEnabled = (SetEnabledFunc*)(baseAddr + 0x41080);
+			typedef void RenderHudFunc(); // Called by rendering loop
+			RenderHudFunc* RenderHud = (RenderHudFunc*)(baseAddr + 0x411e0);
+
+			typedef void HideChapterFunc();
+			HideChapterFunc* HideChapterAnim = (HideChapterFunc*)(baseAddr + 0x41d90);
+
+			// Time Of Day, chapter, 0
+			typedef void EnableChapterFunc(unsigned int, char, char);
+			EnableChapterFunc* ShowChapter = (EnableChapterFunc*)(baseAddr + 0x41e60);
+
+			typedef void HideInvestigatePopupFunc();
+			HideInvestigatePopupFunc* HideInvestigatePopupAnim = (HideInvestigatePopupFunc*)(baseAddr + 0x41520);
+
+			typedef void SetRadioVisibleFunc(char);
+			SetRadioVisibleFunc* SetRadioVisible = (SetRadioVisibleFunc*)(baseAddr + 0x63980);
 		}
 	}
 };
