@@ -19,21 +19,18 @@
     <Filter Include="Header Files\imgui">
       <UniqueIdentifier>{7bdf23ae-afc7-4f5f-8e6c-fae48b7e18d7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\menus">
+      <UniqueIdentifier>{f502edb1-0ee9-4a5f-9eb1-29f077fd3edb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\dangan">
+      <UniqueIdentifier>{09989b3c-f2b1-4a3f-b768-f21c9c099c8e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="pch.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DrFuncs.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DrTypes.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DrValues.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ext\imgui\imconfig.h">
@@ -59,6 +56,24 @@
     </ClInclude>
     <ClInclude Include="Menu.hpp">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dr1Values.h">
+      <Filter>Header Files\dangan</Filter>
+    </ClInclude>
+    <ClInclude Include="DrTypes.h">
+      <Filter>Header Files\dangan</Filter>
+    </ClInclude>
+    <ClInclude Include="Dr1Funcs.h">
+      <Filter>Header Files\dangan</Filter>
+    </ClInclude>
+    <ClInclude Include="Dr2Values.h">
+      <Filter>Header Files\dangan</Filter>
+    </ClInclude>
+    <ClInclude Include="Dr1.h">
+      <Filter>Header Files\dangan</Filter>
+    </ClInclude>
+    <ClInclude Include="Dr2.h">
+      <Filter>Header Files\dangan</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -94,6 +109,15 @@
     </ClCompile>
     <ClCompile Include="Menu.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="menus\Dr1Menu.cpp">
+      <Filter>Source Files\menus</Filter>
+    </ClCompile>
+    <ClCompile Include="menus\Dr2Menu.cpp">
+      <Filter>Source Files\menus</Filter>
+    </ClCompile>
+    <ClCompile Include="Dr2Funcs.h">
+      <Filter>Header Files\dangan</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

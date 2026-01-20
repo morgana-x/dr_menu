@@ -1,283 +1,49 @@
 #include "Menu.hpp"
-#include "DrValues.h"
-#include "DrFuncs.h"
+#include "pch.h"
+#include <string>
 #include "imgui.h"
-bool show_another_window = false;
-int selectedMap = 0;
-int selectedMovie = 0;
-int selectedAchievement = 0;
-int selectedDebugMenu = 0;
+enum DrGame
+{
+    None,
+    DR1,
+    DR2
+};
 
-int selectedSong = 0;
+DrGame Game;
+char actualpath[2048];
+bool Menu::Init()
+{
+    TCHAR szEXEPath[2048];
+  
+    GetModuleFileName(NULL, szEXEPath, 2048);
+    for (int j = 0; szEXEPath[j] != 0; j++)
+        actualpath[j] = szEXEPath[j];
 
-int monocoins = 0;
+    std::string filePath(actualpath);
+    std::size_t found = filePath.find_last_of("/\\");
+    filePath = filePath.substr(found + 1);
 
-float selectedCamPos[3];
-float selectedCamRotX = 0;
+    Game = filePath == "DR1_us.exe" ? DR1 : filePath == "DR2_us.exe" ? DR2 : None;
 
-int selectedScript[3];
+    return true;
+}
 
-
-int charSetPosSelectedChar = 0;
-float charSetPosSelectedPos[3];
-
-int loadStandSelectedChar = 0;
-int loadStandSelectedEmote = 0;
-
-int spawnCharSelectedChar = 0;
-int spawnCharSelectedEmote = 0;
-int charTeleportSelectedChar = 0;
-
-float selectedFov = 45;
-
-
-int hudEnableChapterTimeOfDay = 0;
-int hudEnableChapterChapter = 1;
-int hudEnableChapterAnim = 1;
-
-int selectedTimeOfDay = 0;
-
-#define IM_MIN(A, B)            (((A) < (B)) ? (A) : (B))
 void Menu::Render()
 {
-    /*
-    const float label_width_base = ImGui::GetFontSize() * 2;               // Some amount of width for label, based on font size.
-    const float label_width_max = ImGui::GetContentRegionAvail().x * 0.40f; // ...but always leave some room for framed widgets.
-    const float label_width = IM_MIN(label_width_base, label_width_max);
-    ImGui::PushItemWidth(-label_width);*/
-
-    // 2. Show a simple window that we create ourselves. We use a Begin/End pair to create a named window.
-    {
         ImGui::Begin("Menu");
-
-        if (ImGui::CollapsingHeader("Map"))
-        {
-            ImGui::Text("Map::CurrentMap = %i", *DrValues::Dr1::Map::CurrentMap);
-
-            if (ImGui::Button("Map::LoadMap("))
-                DrFuncs::Dr1::Map::Load(selectedMap);
-            ImGui::SameLine();
-            ImGui::PushItemWidth(80);
-            ImGui::InputInt("##Map_ID", &selectedMap);
-            ImGui::PopItemWidth();
-            ImGui::SameLine();
-            ImGui::Text(")");
-
-            ImGui::Text("Map::Pos = ");
-            ImGui::SameLine();
-            ImGui::PushItemWidth(170);
-            ImGui::InputFloat3("##Map::Pos", (float*)DrValues::Dr1::Map::Pos);
-            ImGui::PopItemWidth();
-        }
-
-       // Movie Func causes crash
-       /* if (ImGui::CollapsingHeader("Movie"))
-        {
-            if (ImGui::Button("Movie::LoadMovie("))
-                DrFuncs::Dr1::Movie::Load(selectedMovie);
-            ImGui::SameLine();
-            ImGui::PushItemWidth(80);
-            ImGui::InputInt("##Movie_ID", &selectedMovie);
-            ImGui::PopItemWidth();
-            ImGui::SameLine();
-            ImGui::Text(")");
-        }*/
-
-        if (ImGui::CollapsingHeader("Game Data"))
-        {
-            monocoins = (int)*DrValues::Dr1::Game::Monocoins;
-            int oldmonocoins = monocoins;
-            ImGui::Text("GameData::Monocoins = ");
-            ImGui::SameLine();
-            ImGui::PushItemWidth(80);
-            ImGui::InputInt("##MonocoinAmount", &monocoins);
-            ImGui::PopItemWidth();
-            if (oldmonocoins != monocoins)
-                *DrValues::Dr1::Game::Monocoins = monocoins;
-           
-            selectedTimeOfDay = (int)DrValues::Dr1::Game::State->TimeOfDay;
-            oldmonocoins = selectedTimeOfDay;
-            ImGui::Text("GameData::State->TimeOfDay =");
-            ImGui::SameLine();
-            ImGui::PushItemWidth(80);
-            ImGui::SliderInt("##GameDataStateTimeOfDay", &selectedTimeOfDay, 0, 4);
-            ImGui::PopItemWidth();
-            if (oldmonocoins != selectedTimeOfDay)
-                DrValues::Dr1::Game::State->TimeOfDay = (short)selectedTimeOfDay;
-
-            ImGui::Text("GameData::State->SkillPoints = %i", DrValues::Dr1::Game::State->SkillPoints);
-            ImGui::Text("GameData::State->UnlockedRulePages = %i", DrValues::Dr1::Game::State->UnlockedRulePages);
-            ImGui::Text("GameData::State->ActionDifficulty = %i", DrValues::Dr1::Game::State->ActionDifficulty);
-            ImGui::Text("GameData::State->LogicDifficulty = %i", DrValues::Dr1::Game::State->LogicDifficulty);
-        }
-
-        /*
-        if (ImGui::CollapsingHeader("Achievement"))
-        {
-            if (ImGui::Button("(CRASH) Achivement::UnlockAchivement("))
-                DrFuncs::Dr1::Achievement::UnlockAchievement(selectedAchievement);
-            ImGui::SameLine();
-            ImGui::InputInt("Trophy_ID", &selectedAchievement);
-            ImGui::SameLine();
-            ImGui::Text(")");
-        }*/
-
         
-        if (ImGui::CollapsingHeader("Player"))
+        switch (Game)
         {
-            ImGui::Text("Player::Pos = %f, %f, %f", DrValues::Dr1::Player::Pos->x, DrValues::Dr1::Player::Pos->y, DrValues::Dr1::Player::Pos->z);
-            ImGui::Text("Player::Rot = %f, %f", DrValues::Dr1::Camera::Rot->x, DrValues::Dr1::Camera::Rot->y);
-            if (ImGui::Button("Player::SetPos("))
-                DrFuncs::Dr1::Player::SetPos(selectedCamPos[0], selectedCamPos[1], selectedCamPos[2], selectedCamRotX);
-            ImGui::SameLine();
-            ImGui::PushItemWidth(160);
-            ImGui::InputFloat3("pos##P_Pos", selectedCamPos, "%.3f");
-            ImGui::PopItemWidth();
-            ImGui::SameLine();
-            ImGui::PushItemWidth(50);
-            ImGui::InputFloat("rot##P_Rot", &selectedCamRotX);
-            ImGui::PopItemWidth();
-            ImGui::SameLine();
-            ImGui::Text(")");
+            case DR1:
+                Menu::Menu_DR1();
+                break;
+            case DR2:
+                Menu::Menu_DR2();
+                break;
+            case None:
+                ImGui::Text("No valid game detected.");
+                break;
         }
-
-        if (ImGui::CollapsingHeader("Script"))
-        {
-            ImGui::Text("Script::CurrentScript = %i, %i, %i", DrValues::Dr1::Script::ScriptId->Chapter, DrValues::Dr1::Script::ScriptId->Scene, DrValues::Dr1::Script::ScriptId->Variant);
-        //    ImGui::Text("Script::CurrentSpeaker = %i", *DrValues::Dr1::Script::Speaker);
-            if (ImGui::Button("Script::LoadAndRun("))
-                DrFuncs::Dr1::Script::LoadAndRun(0, selectedScript[0], selectedScript[1], selectedScript[2]);
-            ImGui::SameLine();
-            ImGui::PushItemWidth(160);
-            ImGui::InputInt3("##Script", selectedScript);
-            ImGui::PopItemWidth();
-            ImGui::SameLine();
-            ImGui::Text(")");
-        }
-        
-        if (ImGui::CollapsingHeader("Audio"))
-        {
-            ImGui::Text("Audio::CurrentSong = %i", *DrValues::Dr1::Audio::CurrentSong);
-
-            if (ImGui::Button("Audio::PlaySong("))
-                DrFuncs::Dr1::Audio::PlaySongWrapper(selectedSong);
-            ImGui::SameLine();
-            ImGui::PushItemWidth(80);
-            ImGui::InputInt("##SongId", &selectedSong);
-            ImGui::PopItemWidth();
-            ImGui::SameLine();
-            ImGui::Text(")");
-        }
-        if (ImGui::CollapsingHeader("Character"))
-        {
-            if (ImGui::Button("Character::LoadStand("))
-                DrFuncs::Dr1::Character::LoadStand(loadStandSelectedChar, loadStandSelectedEmote);
-            ImGui::SameLine();
-            ImGui::PushItemWidth(80);
-            ImGui::InputInt("char##loadStandChar", &loadStandSelectedChar);
-            ImGui::PopItemWidth();
-            ImGui::SameLine();  
-            ImGui::SameLine();
-            ImGui::PushItemWidth(80);
-            ImGui::InputInt("emote##loadStandEmote", &loadStandSelectedEmote);
-            ImGui::PopItemWidth();
-            ImGui::SameLine();
-            ImGui::Text(")");
-
-
-            if (ImGui::Button("Character::Spawn("))
-                DrFuncs::Dr1::Character::SpawnChar(spawnCharSelectedChar, spawnCharSelectedEmote);
-            ImGui::SameLine();
-            ImGui::PushItemWidth(80);
-            ImGui::InputInt("char##spawnChar", &spawnCharSelectedChar);
-            ImGui::PopItemWidth();
-            ImGui::SameLine();
-            ImGui::SameLine();
-            ImGui::PushItemWidth(80);
-            ImGui::InputInt("?##spawnUnk", &spawnCharSelectedEmote);
-            ImGui::PopItemWidth();
-            ImGui::SameLine();
-            ImGui::Text(")");
-
-            if (ImGui::Button("Character::SetPos("))
-                DrFuncs::Dr1::Character::SetPos(charSetPosSelectedChar, charSetPosSelectedPos[0], charSetPosSelectedPos[1], charSetPosSelectedPos[2]);
-            ImGui::SameLine();
-            ImGui::PushItemWidth(80);
-            ImGui::InputInt("char##setPosID", &charSetPosSelectedChar);
-            ImGui::PopItemWidth();
-            ImGui::SameLine();
-            ImGui::PushItemWidth(170);
-            ImGui::InputFloat3("pos##charsetPosPos", charSetPosSelectedPos);
-            ImGui::PopItemWidth();
-            ImGui::SameLine();
-            ImGui::Text(")");
-             
-            if (ImGui::Button("Character::TeleportToPlayer("))
-                DrFuncs::Dr1::Character::SetPos(charTeleportSelectedChar, DrValues::Dr1::Player::Pos->x, DrValues::Dr1::Player::Pos->y, DrValues::Dr1::Player::Pos->z);
-            ImGui::SameLine();
-            ImGui::PushItemWidth(80);
-            ImGui::InputInt("##charTeleportCharID", &charTeleportSelectedChar);
-            ImGui::PopItemWidth();
-            ImGui::SameLine();
-            ImGui::Text(")");
-        }
-
-        if (ImGui::CollapsingHeader("Camera"))
-        {
-            ImGui::Text("Camera::Pos = %f, %f, %f", DrValues::Dr1::Camera::Pos->x, DrValues::Dr1::Camera::Pos->y, DrValues::Dr1::Camera::Pos->z);
-            ImGui::Text("Camera::Rot = %f, %f, %f", DrValues::Dr1::Camera::Rot->x, DrValues::Dr1::Camera::Rot->y, *DrValues::Dr1::Camera::Rot_Up);
-
-            selectedFov = (float)*DrValues::Dr1::Camera::Fov;
-            float oldfov = selectedFov;
-            ImGui::Text("Camera::Fov = ");
-            ImGui::SameLine();
-            ImGui::PushItemWidth(85);
-            ImGui::InputFloat("##CamFov", &selectedFov);
-            ImGui::PopItemWidth();
-            if (oldfov != selectedFov)
-                DrFuncs::Dr1::Camera::SetFov(selectedFov);
-        }
-        if (ImGui::CollapsingHeader("HUD"))
-        {
-            if (ImGui::Button("HUD::ToggleRadio()"))
-                *DrValues::Dr1::HUD::RadioVisible = !(*DrValues::Dr1::HUD::RadioVisible);
-
-            if (ImGui::Button("HUD::HideChapter()"))
-                DrFuncs::Dr1::HUD::HideChapterAnim();
-
-            if (ImGui::Button("HUD::ShowChapter("))
-                DrFuncs::Dr1::HUD::ShowChapter(hudEnableChapterTimeOfDay, (char)hudEnableChapterChapter, (char)hudEnableChapterAnim);
-            ImGui::SameLine();
-            ImGui::PushItemWidth(60);
-            ImGui::SliderInt("TimeDay##EnableChapter", &hudEnableChapterTimeOfDay, 0, 4);
-            ImGui::SameLine();
-            ImGui::SliderInt("Chapter##EnableChapter", &hudEnableChapterChapter, 1, 8);
-            ImGui::SameLine();
-            ImGui::SliderInt("DoAnim##EnableChapter", &hudEnableChapterAnim, 0, 1);
-            ImGui::PopItemWidth();
-            ImGui::SameLine();
-            ImGui::Text(")");        
-        }
-        if (ImGui::CollapsingHeader("Debug"))
-        {
-            selectedDebugMenu = (int)*DrValues::Dr1::Debug::SelectedMenu;
-            int oldSelected = selectedDebugMenu;
-            ImGui::Text("Debug::CurrentMenu = ");
-            ImGui::SameLine();
-            ImGui::PushItemWidth(80);
-            ImGui::InputInt("##Debug::CurrentMenu", &selectedDebugMenu);
-            ImGui::PopItemWidth();
-            if (oldSelected != selectedDebugMenu)
-                *DrValues::Dr1::Debug::SelectedMenu = (char)selectedDebugMenu;
-
-            if (ImGui::Button("Debug::EnableMenu()"))
-                DrFuncs::Dr1::Debug::EnableDebugMenu();
-        }
-
-
 
         ImGui::End();
-    }
-
-//    ImGui::PopItemWidth();
 }
