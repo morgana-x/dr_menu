@@ -63,7 +63,9 @@ namespace DrLib
 			namespace Game
 			{
 				GameState* State = (GameState*)(baseAddr + 0x2e47a8);
-
+			}
+			namespace Collectables
+			{
 				unsigned short* Monocoins = (unsigned short*)(baseAddr + 0x2e47c8);
 			}
 

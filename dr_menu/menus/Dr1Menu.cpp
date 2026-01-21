@@ -72,9 +72,9 @@ void Menu::Menu_DR1()
          ImGui::Text(")");
      }*/
 
-    if (ImGui::CollapsingHeader("Game Data"))
+    if (ImGui::CollapsingHeader("Collectables"))
     {
-        monocoins = (int)*DrLib::Dr1::Values::Game::Monocoins;
+        monocoins = (int)*DrLib::Dr1::Values::Collectables::Monocoins;
         int oldmonocoins = monocoins;
         ImGui::Text("GameData::Monocoins = ");
         ImGui::SameLine();
@@ -82,10 +82,13 @@ void Menu::Menu_DR1()
         ImGui::InputInt("##MonocoinAmount", &monocoins);
         ImGui::PopItemWidth();
         if (oldmonocoins != monocoins)
-            *Values::Game::Monocoins = monocoins;
+            *Values::Collectables::Monocoins = monocoins;
+    }
 
+    if (ImGui::CollapsingHeader("Game Data"))
+    {
         selectedTimeOfDay = (int)Values::Game::State->TimeOfDay;
-        oldmonocoins = selectedTimeOfDay;
+        int oldmonocoins = selectedTimeOfDay;
         ImGui::Text("GameData::State->TimeOfDay =");
         ImGui::SameLine();
         ImGui::PushItemWidth(80);

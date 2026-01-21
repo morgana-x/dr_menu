@@ -9,7 +9,7 @@ int dr2selectedDebugMenu = 0;
 int dr2selectedSong = 0;
 int dr2loadStandSelectedChar = 0;
 int dr2loadStandSelectedEmote = 0;
-
+int dr2monocoins = 0;
 void Menu::Menu_DR2()
 {
 
@@ -46,6 +46,20 @@ void Menu::Menu_DR2()
         ImGui::SameLine();
         ImGui::Text(")");
     }
+
+    if (ImGui::CollapsingHeader("Collectables"))
+    {
+        dr2monocoins = (int)*Values::Collectables::Monocoins;
+        int oldmonocoins = dr2monocoins;
+        ImGui::Text("Collectables::Monocoins = ");
+        ImGui::SameLine();
+        ImGui::PushItemWidth(80);
+        ImGui::InputInt("##MonocoinAmount", &dr2monocoins);
+        ImGui::PopItemWidth();
+        if (oldmonocoins != dr2monocoins)
+            *Values::Collectables::Monocoins = dr2monocoins;
+    }
+
     if (ImGui::CollapsingHeader("Player"))
     {
         ImGui::Text("Player::Level = %i", *Values::Player::Level);

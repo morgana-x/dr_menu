@@ -16,6 +16,10 @@ namespace DrLib
 			{
 				int* Level = (int*)(baseAddr + 0x3862b8);
 			}
+			namespace Collectables
+			{
+				unsigned short* Monocoins = (unsigned short*)(baseAddr + 0x38a042);
+			}
 		}
 	}
 }
