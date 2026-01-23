@@ -26,7 +26,7 @@ int loadStandSelectedChar = 0;
 int loadStandSelectedEmote = 0;
 
 int spawnCharSelectedChar = 0;
-int spawnCharSelectedEmote = 0;
+int spawnCharSelectedPosDr1 = 0;
 int charTeleportSelectedChar = 0;
 int despawnCharSelectedChar;
 
@@ -192,14 +192,14 @@ void Menu::Menu_DR1()
 
 
         if (ImGui::Button("Character::Spawn("))
-            Funcs::Character::SpawnChar(spawnCharSelectedChar, spawnCharSelectedEmote);
+            Funcs::Character::SpawnChar(spawnCharSelectedChar, spawnCharSelectedPosDr1);
         ImGui::SameLine();
         ImGui::PushItemWidth(80);
         ImGui::InputInt("char##spawnChar", &spawnCharSelectedChar);
         ImGui::PopItemWidth();
         ImGui::SameLine();
         ImGui::PushItemWidth(80);
-        ImGui::InputInt("?##spawnUnk", &spawnCharSelectedEmote);
+        ImGui::InputInt("pos##spawnUnk", &spawnCharSelectedPosDr1);
         ImGui::PopItemWidth();
         ImGui::SameLine();
         ImGui::Text(")");

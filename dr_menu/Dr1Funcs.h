@@ -82,6 +82,8 @@ namespace DrLib
 
 			namespace Game
 			{
+				typedef void MainLoopFunc();
+				inline MainLoopFunc* MainLoop = (MainLoopFunc*)(baseAddr + 0x447b0);
 			}
 
 			namespace Audio
