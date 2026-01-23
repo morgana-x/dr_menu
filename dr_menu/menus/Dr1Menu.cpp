@@ -37,6 +37,9 @@ int hudEnableChapterChapter = 1;
 int hudEnableChapterAnim = 1;
 
 int selectedTimeOfDay = 0;
+
+int dr1movementmode = 0;
+
 void Menu::Menu_DR1()
 {
     if (ImGui::CollapsingHeader("Map"))
@@ -76,7 +79,7 @@ void Menu::Menu_DR1()
     {
         monocoins = (int)*DrLib::Dr1::Values::Collectables::Monocoins;
         int oldmonocoins = monocoins;
-        ImGui::Text("GameData::Monocoins = ");
+        ImGui::Text("Collectables::Monocoins = ");
         ImGui::SameLine();
         ImGui::PushItemWidth(80);
         ImGui::InputInt("##MonocoinAmount", &monocoins);
@@ -119,6 +122,16 @@ void Menu::Menu_DR1()
     {
         ImGui::Text("Player::Pos = %f, %f, %f", Values::Player::Pos->x, Values::Player::Pos->y, Values::Player::Pos->z);
         ImGui::Text("Player::Rot = %f, %f", Values::Camera::Rot->x, Values::Camera::Rot->y);
+
+        dr1movementmode = (int)*DrLib::Dr1::Values::Player::MovementMode;
+        int oldmonocoins = dr1movementmode;
+        ImGui::Text("Player::MovementMode = ");
+        ImGui::SameLine();
+        ImGui::PushItemWidth(55);
+        ImGui::SliderInt("##Player::MovementModeInput", &dr1movementmode,0,2);
+        if (oldmonocoins != dr1movementmode)
+            *DrLib::Dr1::Values::Player::MovementMode = (char)dr1movementmode;
+
         if (ImGui::Button("Player::SetPos("))
             Funcs::Player::SetPos(selectedCamPos[0], selectedCamPos[1], selectedCamPos[2], selectedCamRotX);
         ImGui::SameLine();

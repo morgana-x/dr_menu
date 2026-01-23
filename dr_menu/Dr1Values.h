@@ -17,10 +17,13 @@ namespace DrLib
 			namespace Player
 			{
 				Vec3* Pos = (Vec3*)(baseAddr + 0x33cc80);
+
+				char* MovementMode = (char*)(baseAddr + 0x33cc4c);
 			}
 
 			namespace Camera
 			{
+				char* Enabled = (char*)(baseAddr + 0x2a5dd8);
 
 				Vec3* Pos = (Vec3*)(baseAddr + 0x2a5de0);
 

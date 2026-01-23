@@ -24,6 +24,13 @@ namespace DrLib
 				short Scene;
 				short Variant;
 			};
+
+			enum MovementMode
+			{
+				Walk,
+				Vertical,
+				Room
+			};
 		}
 
 		namespace Dr1
