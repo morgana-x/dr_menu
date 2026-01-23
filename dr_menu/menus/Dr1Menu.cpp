@@ -28,6 +28,7 @@ int loadStandSelectedEmote = 0;
 int spawnCharSelectedChar = 0;
 int spawnCharSelectedEmote = 0;
 int charTeleportSelectedChar = 0;
+int despawnCharSelectedChar;
 
 float selectedFov = 45;
 
@@ -197,9 +198,17 @@ void Menu::Menu_DR1()
         ImGui::InputInt("char##spawnChar", &spawnCharSelectedChar);
         ImGui::PopItemWidth();
         ImGui::SameLine();
-        ImGui::SameLine();
         ImGui::PushItemWidth(80);
         ImGui::InputInt("?##spawnUnk", &spawnCharSelectedEmote);
+        ImGui::PopItemWidth();
+        ImGui::SameLine();
+        ImGui::Text(")");
+
+        if (ImGui::Button("Character::Despawn("))
+            Funcs::Character::DespawnChar(despawnCharSelectedChar);
+        ImGui::SameLine();
+        ImGui::PushItemWidth(80);
+        ImGui::InputInt("char##despawnChar", &despawnCharSelectedChar);
         ImGui::PopItemWidth();
         ImGui::SameLine();
         ImGui::Text(")");

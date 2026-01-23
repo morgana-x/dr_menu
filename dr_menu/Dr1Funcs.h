@@ -61,6 +61,9 @@ namespace DrLib
 
 				typedef void SpawnCharFunc(unsigned int, char);
 				inline SpawnCharFunc* SpawnChar = (SpawnCharFunc*)(baseAddr + 0x22840);
+
+				typedef void DespawnCharFunc(unsigned int);
+				inline DespawnCharFunc* DespawnChar = (DespawnCharFunc*)(baseAddr + 0x22980);
 			}
 
 			namespace Script
