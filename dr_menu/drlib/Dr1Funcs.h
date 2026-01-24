@@ -101,6 +101,10 @@ namespace DrLib
 			{
 				typedef void EnableDebugMenuFunc();
 				inline EnableDebugMenuFunc* EnableDebugMenu = (EnableDebugMenuFunc*)(baseAddr + 0x2c3a0);
+
+
+				typedef void LogFunc(char* fmt, ...);
+				inline LogFunc* Log = (LogFunc*)(baseAddr + 0x100b00);
 			}
 
 			namespace HUD

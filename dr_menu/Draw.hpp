@@ -1,4 +1,5 @@
 namespace Draw
 {
-	void Init();
+	inline extern void Init();
+	inline extern HMODULE hCurrentModule = NULL;
 }

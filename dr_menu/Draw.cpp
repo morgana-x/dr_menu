@@ -43,8 +43,6 @@ LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 // Main code
 void Draw::Init()
 {
-    if (!Menu::Init())
-        return;
     // Make process DPI aware and obtain main monitor scale
     ImGui_ImplWin32_EnableDpiAwareness();
     float main_scale = ImGui_ImplWin32_GetDpiScaleForMonitor(::MonitorFromPoint(POINT{ 0, 0 }, MONITOR_DEFAULTTOPRIMARY));
@@ -141,7 +139,7 @@ void Draw::Init()
     ::DestroyWindow(hwnd);
     ::UnregisterClassW(wc.lpszClassName, wc.hInstance);
 
- //   CreateThread(nullptr, NULL, (LPTHREAD_START_ROUTINE)FreeLibrary, Draw::hCurrentModule, NULL, nullptr);
+    CreateThread(nullptr, NULL, (LPTHREAD_START_ROUTINE)FreeLibrary, Draw::hCurrentModule, NULL, nullptr);
     return;
 }
 

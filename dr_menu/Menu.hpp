@@ -1,8 +1,8 @@
+#pragma once
 namespace Menu
 {
-	bool Init();
-	void Render();
+	inline extern void Render();
 
-	void Menu_DR1();
-	void Menu_DR2();
+	inline extern void Menu_DR1();
+	inline extern void Menu_DR2();
 }

@@ -1,9 +1,9 @@
 // dllmain.cpp : Defines the entry point for the DLL application.
 #include "pch.h"
+#include "Core.hpp"
 #include "Draw.hpp"
-
+#include "stdio.h"
 HANDLE hCurrentUIThread = nullptr;
-
 
 BOOL APIENTRY DllMain( HMODULE hModule,
                        DWORD  ul_reason_for_call,
@@ -14,11 +14,13 @@ BOOL APIENTRY DllMain( HMODULE hModule,
     {
     case DLL_PROCESS_ATTACH:
         DisableThreadLibraryCalls(hModule);
-     //   Draw::hCurrentModule = hModule;
-        hCurrentUIThread = CreateThread(nullptr, NULL, (LPTHREAD_START_ROUTINE)Draw::Init, nullptr, NULL, nullptr);
+        Draw::hCurrentModule = hModule;
+
+        hCurrentUIThread = CreateThread(nullptr, NULL, (LPTHREAD_START_ROUTINE)Core::Init, nullptr, NULL, nullptr);
         break;
     case DLL_PROCESS_DETACH:
         TerminateThread(hCurrentUIThread, 0);
+        Core::Uninit();
         break;
     }
     return TRUE;

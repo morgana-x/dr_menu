@@ -13,17 +13,26 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Source Files\imgui">
-      <UniqueIdentifier>{eeba81c5-f492-4194-8152-dc95c9a59221}</UniqueIdentifier>
+    <Filter Include="Header Files\DrLib">
+      <UniqueIdentifier>{09989b3c-f2b1-4a3f-b768-f21c9c099c8e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\imgui">
+    <Filter Include="Header Files\ImGui">
       <UniqueIdentifier>{7bdf23ae-afc7-4f5f-8e6c-fae48b7e18d7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\menus">
+    <Filter Include="Source Files\ImGui">
+      <UniqueIdentifier>{eeba81c5-f492-4194-8152-dc95c9a59221}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Menus">
       <UniqueIdentifier>{f502edb1-0ee9-4a5f-9eb1-29f077fd3edb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\dangan">
-      <UniqueIdentifier>{09989b3c-f2b1-4a3f-b768-f21c9c099c8e}</UniqueIdentifier>
+    <Filter Include="Header Files\MinHook">
+      <UniqueIdentifier>{e565471f-dbbc-4caa-a107-ae230669f804}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MinHook">
+      <UniqueIdentifier>{5aaeaa8b-81bc-41cb-826c-b9440f1bf0c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Hooks">
+      <UniqueIdentifier>{3ba0d20c-e1ff-4250-a402-3f740080f4a1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -34,22 +43,22 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ext\imgui\imconfig.h">
-      <Filter>Header Files\imgui</Filter>
+      <Filter>Header Files\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="ext\imgui\imgui.h">
-      <Filter>Header Files\imgui</Filter>
+      <Filter>Header Files\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="ext\imgui\imgui_impl_opengl3.h">
-      <Filter>Header Files\imgui</Filter>
+      <Filter>Header Files\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="ext\imgui\imgui_impl_opengl3_loader.h">
-      <Filter>Header Files\imgui</Filter>
+      <Filter>Header Files\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="ext\imgui\imgui_impl_win32.h">
-      <Filter>Header Files\imgui</Filter>
+      <Filter>Header Files\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="ext\imgui\imgui_internal.h">
-      <Filter>Header Files\imgui</Filter>
+      <Filter>Header Files\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="Draw.hpp">
       <Filter>Header Files</Filter>
@@ -57,23 +66,35 @@
     <ClInclude Include="Menu.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dr1Values.h">
-      <Filter>Header Files\dangan</Filter>
+    <ClInclude Include="Hook.hpp">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DrTypes.h">
-      <Filter>Header Files\dangan</Filter>
+    <ClInclude Include="drlib\Dr1.h">
+      <Filter>Header Files\DrLib</Filter>
     </ClInclude>
-    <ClInclude Include="Dr1Funcs.h">
-      <Filter>Header Files\dangan</Filter>
+    <ClInclude Include="drlib\Dr1Funcs.h">
+      <Filter>Header Files\DrLib</Filter>
     </ClInclude>
-    <ClInclude Include="Dr2Values.h">
-      <Filter>Header Files\dangan</Filter>
+    <ClInclude Include="drlib\Dr1Values.h">
+      <Filter>Header Files\DrLib</Filter>
     </ClInclude>
-    <ClInclude Include="Dr1.h">
-      <Filter>Header Files\dangan</Filter>
+    <ClInclude Include="drlib\Dr2.h">
+      <Filter>Header Files\DrLib</Filter>
     </ClInclude>
-    <ClInclude Include="Dr2.h">
-      <Filter>Header Files\dangan</Filter>
+    <ClInclude Include="drlib\Dr2Funcs.h">
+      <Filter>Header Files\DrLib</Filter>
+    </ClInclude>
+    <ClInclude Include="drlib\Dr2Values.h">
+      <Filter>Header Files\DrLib</Filter>
+    </ClInclude>
+    <ClInclude Include="drlib\DrTypes.h">
+      <Filter>Header Files\DrLib</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\minhook\include\MinHook.h">
+      <Filter>Header Files\MinHook</Filter>
+    </ClInclude>
+    <ClInclude Include="Core.hpp">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -87,37 +108,51 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ext\imgui\imgui.cpp">
-      <Filter>Source Files\imgui</Filter>
+      <Filter>Source Files\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="ext\imgui\imgui_demo.cpp">
-      <Filter>Source Files\imgui</Filter>
+      <Filter>Source Files\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="ext\imgui\imgui_draw.cpp">
-      <Filter>Source Files\imgui</Filter>
+      <Filter>Source Files\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="ext\imgui\imgui_impl_opengl3.cpp">
-      <Filter>Source Files\imgui</Filter>
+      <Filter>Source Files\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="ext\imgui\imgui_impl_win32.cpp">
-      <Filter>Source Files\imgui</Filter>
+      <Filter>Source Files\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="ext\imgui\imgui_widgets.cpp">
-      <Filter>Source Files\imgui</Filter>
+      <Filter>Source Files\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="ext\imgui\imgui_tables.cpp">
-      <Filter>Source Files\imgui</Filter>
+      <Filter>Source Files\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="Menu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="menus\Dr1Menu.cpp">
-      <Filter>Source Files\menus</Filter>
+      <Filter>Source Files\Menus</Filter>
     </ClCompile>
     <ClCompile Include="menus\Dr2Menu.cpp">
-      <Filter>Source Files\menus</Filter>
+      <Filter>Source Files\Menus</Filter>
     </ClCompile>
-    <ClCompile Include="Dr2Funcs.h">
-      <Filter>Header Files\dangan</Filter>
+    <ClCompile Include="Hook.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="hooks\Dr1Hook.cpp">
+      <Filter>Source Files\Hooks</Filter>
+    </ClCompile>
+    <ClCompile Include="hooks\Dr2Hook.cpp">
+      <Filter>Source Files\Hooks</Filter>
+    </ClCompile>
+    <ClCompile Include="Core.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="ext\minhook\lib\libMinHook.x86.lib">
+      <Filter>Header Files\MinHook</Filter>
+    </Library>
   </ItemGroup>
 </Project>

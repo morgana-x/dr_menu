@@ -167,26 +167,30 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Dr1.h" />
-    <ClInclude Include="Dr1Funcs.h" />
-    <ClInclude Include="Dr2.h" />
-    <ClInclude Include="Dr2Values.h" />
-    <ClInclude Include="DrTypes.h" />
-    <ClInclude Include="Dr1Values.h" />
+    <ClInclude Include="Core.hpp" />
+    <ClInclude Include="drlib\Dr1.h" />
+    <ClInclude Include="drlib\Dr1Funcs.h" />
+    <ClInclude Include="drlib\Dr1Values.h" />
+    <ClInclude Include="drlib\Dr2.h" />
+    <ClInclude Include="drlib\Dr2Funcs.h" />
+    <ClInclude Include="drlib\Dr2Values.h" />
+    <ClInclude Include="drlib\DrTypes.h" />
     <ClInclude Include="ext\imgui\imconfig.h" />
     <ClInclude Include="ext\imgui\imgui.h" />
     <ClInclude Include="ext\imgui\imgui_impl_opengl3.h" />
     <ClInclude Include="ext\imgui\imgui_impl_opengl3_loader.h" />
     <ClInclude Include="ext\imgui\imgui_impl_win32.h" />
     <ClInclude Include="ext\imgui\imgui_internal.h" />
+    <ClInclude Include="ext\minhook\include\MinHook.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Draw.hpp" />
+    <ClInclude Include="Hook.hpp" />
     <ClInclude Include="Menu.hpp" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Core.cpp" />
     <ClCompile Include="dllmain.cpp" />
-    <ClCompile Include="Dr2Funcs.h" />
     <ClCompile Include="ext\imgui\imgui.cpp" />
     <ClCompile Include="ext\imgui\imgui_demo.cpp" />
     <ClCompile Include="ext\imgui\imgui_draw.cpp" />
@@ -195,6 +199,9 @@
     <ClCompile Include="ext\imgui\imgui_tables.cpp" />
     <ClCompile Include="ext\imgui\imgui_widgets.cpp" />
     <ClCompile Include="Draw.cpp" />
+    <ClCompile Include="Hook.cpp" />
+    <ClCompile Include="hooks\Dr1Hook.cpp" />
+    <ClCompile Include="hooks\Dr2Hook.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="menus\Dr1Menu.cpp" />
     <ClCompile Include="menus\Dr2Menu.cpp" />
@@ -204,6 +211,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="ext\minhook\lib\libMinHook.x86.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

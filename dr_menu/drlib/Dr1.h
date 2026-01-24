@@ -1,10 +1,10 @@
 #pragma once
-#include "pch.h"
+#include "windows.h"
 namespace DrLib
 {
 	namespace Dr1
 	{
-		unsigned long baseAddr = (unsigned long)GetModuleHandle(NULL);
+		inline extern unsigned long baseAddr = (unsigned long)GetModuleHandle(NULL);
 	}
 }
 #include "DrTypes.h"
