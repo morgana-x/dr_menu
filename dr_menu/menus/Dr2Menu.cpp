@@ -10,6 +10,12 @@ int dr2selectedSong = 0;
 int dr2loadStandSelectedChar = 0;
 int dr2loadStandSelectedEmote = 0;
 int dr2monocoins = 0;
+static int dr2TextLayer = 1;
+static int dr2TextColor = 1;
+static int dr2TextPosX = 100;
+static int dr2TextPosY = 100;
+static char dr2InputBuf[128] = "Text Custom";
+
 void Menu::Menu_DR2()
 {
 
@@ -79,5 +85,31 @@ void Menu::Menu_DR2()
         ImGui::PopItemWidth();
         ImGui::SameLine();
         ImGui::Text(")");
+    }
+    if (ImGui::CollapsingHeader("Text Engine Test"))
+    {
+        ImGui::InputInt("Layer", &dr2TextLayer);
+        ImGui::InputInt("Color ID", &dr2TextColor);
+        ImGui::SliderInt("Pos X", &dr2TextPosX, 0, 1280);
+        ImGui::SliderInt("Pos Y", &dr2TextPosY, 0, 720);
+
+        ImGui::InputText("Texto", dr2InputBuf, IM_ARRAYSIZE(dr2InputBuf));
+
+        if (ImGui::Button("Desenhar Texto Digitado"))
+        {
+            wchar_t wMsg[128];
+            MultiByteToWideChar(CP_UTF8, 0, dr2InputBuf, -1, wMsg, 128);
+
+            int currentX = dr2TextPosX;
+            size_t len = wcslen(wMsg);
+
+            for (size_t i = 0; i < len; i++)
+            {
+                int charWidth = Funcs::textBuffer::Draw(dr2TextLayer, currentX, dr2TextPosY, (short)wMsg[i], dr2TextColor);
+
+                // The function returns the size of the drawn character
+                currentX += (charWidth > 0) ? charWidth : 20;
+            }
+        }
     }
 }
