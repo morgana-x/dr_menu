@@ -10,6 +10,12 @@ int dr2selectedSong = 0;
 int dr2loadStandSelectedChar = 0;
 int dr2loadStandSelectedEmote = 0;
 int dr2monocoins = 0;
+int dr2TextLayer = 1;
+int dr2TextColor = 0;
+int dr2TextPosX = 100;
+int dr2TextPosY = 100;
+char dr2InputBuf[128] = "Text Custom";
+
 void Menu::Menu_DR2()
 {
 
@@ -79,5 +85,39 @@ void Menu::Menu_DR2()
         ImGui::PopItemWidth();
         ImGui::SameLine();
         ImGui::Text(")");
+    }
+    if (ImGui::CollapsingHeader("Text Rendering"))
+    {
+        ImGui::Text("Layer ID:"); ImGui::SameLine(150);
+        ImGui::InputInt("##LayerID", &dr2TextLayer);
+        ImGui::Text("CLT Color:"); ImGui::SameLine(150);
+        if (ImGui::InputInt("##CltIdx", &dr2TextColor)) {
+            if (dr2TextColor < 0) dr2TextColor = 0;
+            if (dr2TextColor > 97) dr2TextColor = 97;
+        }
+        ImGui::SameLine();
+        ImGui::TextDisabled("(Max: 97)");
+        ImGui::Text("Position X:"); ImGui::SameLine(150);
+        ImGui::SliderInt("##PosX", &dr2TextPosX, 0, 1280);
+        ImGui::Text("Position Y:"); ImGui::SameLine(150);
+        ImGui::SliderInt("##PosY", &dr2TextPosY, 0, 720);
+        ImGui::Text("Text:"); ImGui::SameLine(150);
+        ImGui::InputText("##InputStr", dr2InputBuf, IM_ARRAYSIZE(dr2InputBuf));
+        ImGui::SameLine();
+
+        if (ImGui::Button("Render Text"))
+        {
+            wchar_t wMsg[128];
+            MultiByteToWideChar(CP_UTF8, 0, dr2InputBuf, -1, wMsg, 128);
+
+            int currentX = dr2TextPosX;
+            size_t len = wcslen(wMsg);
+
+            for (size_t i = 0; i < len; i++)
+            {
+                int charWidth = Funcs::TextRender::Draw(dr2TextLayer, currentX, dr2TextPosY, (short)wMsg[i], dr2TextColor);
+                currentX += (charWidth > 0) ? charWidth : 20;
+            }
+        }
     }
 }

@@ -26,11 +26,12 @@ namespace DrLib
 				inline extern LoadStandFunc* LoadStand = (LoadStandFunc*)(baseAddr + 0x615d0);
 
 			}
-			/// teste
-			namespace textBuffer
+			namespace TextRender
 			{
-				typedef int(__cdecl* DrawTextDRIF)(int layer, int posX, int posY, short character, int colorIndex);
-				inline DrawTextDRIF Draw = (DrawTextDRIF)(baseAddr + 0x154310);
+				typedef int(__cdecl* DrawText)(int layer, int posX, int posY, short character, int colorIndex);
+				inline DrawText Draw = (DrawText)(baseAddr + 0x154310);
+
+
 				inline void PrintString(int layer, int x, int y, const wchar_t* str, int color)
 				{
 					int currentX = x;
