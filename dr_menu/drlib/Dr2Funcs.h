@@ -24,9 +24,16 @@ namespace DrLib
 
 			namespace Character
 			{
-				typedef void LoadStandFunc(unsigned int, int);
+				typedef void LoadStandFunc(unsigned int chara, int emote);
 				inline extern LoadStandFunc* LoadStand = (LoadStandFunc*)(baseAddr + 0x615d0);
 
+
+				typedef void SpawnCharFunc(unsigned int chara, char roomPos);
+				inline SpawnCharFunc* SpawnChar = (SpawnCharFunc*)(baseAddr + 0x61180);
+
+
+				typedef void CreateCharFunc(unsigned int chara);
+				inline CreateCharFunc* CreateChar = (CreateCharFunc*)(baseAddr + 0x5f030);
 			}
 
 			namespace Debug

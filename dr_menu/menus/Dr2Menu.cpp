@@ -10,6 +10,11 @@ int dr2selectedSong = 0;
 int dr2loadStandSelectedChar = 0;
 int dr2loadStandSelectedEmote = 0;
 int dr2monocoins = 0;
+
+int dr2spawnCharSelectedChar = 0;
+int dr2spawnCharSelectedPosDr1 = 0;
+
+int dr2selectedSpawnChar = 0;
 void Menu::Menu_DR2()
 {
 
@@ -79,5 +84,21 @@ void Menu::Menu_DR2()
         ImGui::PopItemWidth();
         ImGui::SameLine();
         ImGui::Text(")");
+
+
+        if (ImGui::Button("Character::Spawn("))
+            Funcs::Character::SpawnChar(dr2spawnCharSelectedChar, (char)dr2spawnCharSelectedPosDr1);
+        ImGui::SameLine();
+        ImGui::PushItemWidth(80);
+        ImGui::InputInt("char##spawnChar", &dr2spawnCharSelectedChar);
+        ImGui::PopItemWidth();
+        ImGui::SameLine();
+        ImGui::PushItemWidth(80);
+        ImGui::InputInt("pos##spawnUnk", &dr2spawnCharSelectedPosDr1);
+        ImGui::PopItemWidth();
+        ImGui::SameLine();
+        ImGui::Text(")");
+
+     
     }
 }
