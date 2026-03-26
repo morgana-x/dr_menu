@@ -1,5 +1,7 @@
 #include "Hook.hpp"
 #include "Core.hpp"
+#include <cstdio>
+
 namespace Hook
 {
 	void HookGame()
@@ -15,4 +17,5 @@ namespace Hook
 				break;
 		}
 	}
+
 }

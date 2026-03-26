@@ -21,6 +21,7 @@ namespace DrLib
 					PlaySong(track, volume);
 				}
 			}
+
 			namespace Character
 			{
 				typedef void LoadStandFunc(unsigned int chara, int emote);
@@ -34,6 +35,7 @@ namespace DrLib
 				typedef void CreateCharFunc(unsigned int chara);
 				inline CreateCharFunc* CreateChar = (CreateCharFunc*)(baseAddr + 0x5f030);
 			}
+
 			namespace Debug
 			{
 				typedef void LogFunc(char* fmt, ...);
