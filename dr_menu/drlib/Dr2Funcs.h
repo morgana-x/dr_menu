@@ -26,6 +26,7 @@ namespace DrLib
 				inline extern LoadStandFunc* LoadStand = (LoadStandFunc*)(baseAddr + 0x615d0);
 
 			}
+			/// teste
 			namespace textBuffer
 			{
 				typedef int(__cdecl* DrawTextDRIF)(int layer, int posX, int posY, short character, int colorIndex);
