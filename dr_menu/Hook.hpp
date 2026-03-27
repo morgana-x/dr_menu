@@ -26,16 +26,16 @@ namespace Hook
 		MH_STATUS result = MH_CreateHookEx(pTarget, pDetour, ppOriginal);
 		if (result != MH_OK)
 		{
-			printf("Failed to create hook %s", name);
+			printf("Failed to create hook %s\n", name);
 			return result;
 		}
 
 		result = MH_EnableHook(pTarget);
 
 		if (result != MH_OK)
-			printf("Failed to init hook %s", name);
+			printf("Failed to init hook %s\n", name);
 		else
-			printf("Hooked %s at %i", name, (int)pTarget);
+			printf("Hooked %s at %i\n", name, (int)pTarget);
 		return result;
 	}
 }
