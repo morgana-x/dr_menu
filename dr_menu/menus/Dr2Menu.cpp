@@ -130,15 +130,7 @@ void Menu::Menu_DR2()
         {
             wchar_t wMsg[128];
             MultiByteToWideChar(CP_UTF8, 0, dr2InputBuf, -1, wMsg, 128);
-
-            int currentX = dr2TextPosX;
-            size_t len = wcslen(wMsg);
-
-            for (size_t i = 0; i < len; i++)
-            {
-                int charWidth = Funcs::TextRender::Draw(dr2TextLayer, currentX, dr2TextPosY, (short)wMsg[i], dr2TextColor);
-                currentX += (charWidth > 0) ? charWidth : 20;
-            }
+            Funcs::TextRender::PrintString(dr2TextLayer, dr2TextPosX, dr2TextPosY, wMsg, dr2TextColor);
         }
     }
 }
