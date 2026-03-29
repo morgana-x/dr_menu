@@ -23,5 +23,6 @@ namespace Hook
 		printf("Hooking Dr2...\n");
 
 		Hook::InitHook("Log", DrLib::Dr2::Funcs::Debug::Log, &Dr2LogDetour, &Dr2LogFuncOriginal);
+		
 	}
 }

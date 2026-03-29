@@ -41,6 +41,12 @@ int selectedTimeOfDay = 0;
 
 int dr1movementmode = 0;
 
+int dr1TextLayer = 1;
+int dr1TextColor = 0;
+int dr1TextPosX = 100;
+int dr1TextPosY = 100;
+char dr1InputBuf[128] = "Text Custom";
+
 void Menu::Menu_DR1()
 {
     if (ImGui::CollapsingHeader("Map"))
@@ -286,5 +292,31 @@ void Menu::Menu_DR1()
 
         if (ImGui::Button("Debug::EnableMenu()"))
             Funcs::Debug::EnableDebugMenu();
+    }
+    if (ImGui::CollapsingHeader("Text Rendering"))
+    {
+        ImGui::Text("Layer ID:"); ImGui::SameLine(150);
+        ImGui::InputInt("##LayerID", &dr1TextLayer);
+        ImGui::Text("CLT Color:"); ImGui::SameLine(150);
+        if (ImGui::InputInt("##CltIdx", &dr1TextColor)) {
+            if (dr1TextColor < 0) dr1TextColor = 0;
+            if (dr1TextColor > 97) dr1TextColor = 97;
+        }
+        ImGui::SameLine();
+        ImGui::TextDisabled("(Max: 97)");
+        ImGui::Text("Position X:"); ImGui::SameLine(150);
+        ImGui::SliderInt("##PosX", &dr1TextPosX, 0, 1280);
+        ImGui::Text("Position Y:"); ImGui::SameLine(150);
+        ImGui::SliderInt("##PosY", &dr1TextPosY, 0, 720);
+        ImGui::Text("Text:"); ImGui::SameLine(150);
+        ImGui::InputText("##InputStr", dr1InputBuf, IM_ARRAYSIZE(dr1InputBuf));
+        ImGui::SameLine();
+
+        if (ImGui::Button("Render Text"))
+        {
+            wchar_t wMsg[128];
+            MultiByteToWideChar(CP_UTF8, 0, dr1InputBuf, -1, wMsg, 128);
+            Funcs::TextRender::PrintString(dr1TextLayer, dr1TextPosX, dr1TextPosY, wMsg, dr1TextColor);
+        }
     }
 }

@@ -41,8 +41,9 @@ namespace DrLib
 				typedef void LogFunc(char* fmt, ...);
 				inline LogFunc* Log = (LogFunc*)(baseAddr + 0x158c40);
 
-				typedef void DrawTextFunc(...);
-				inline DrawTextFunc* DrawDebugText = (DrawTextFunc*)(baseAddr + 0x931b3);
+				typedef void (__cdecl* DrawTextFunc)(int x, int y, const char* TextDebug);
+				inline DrawTextFunc DrawDebugText = (DrawTextFunc)(baseAddr + 0x135b0);
+
 			}
 			namespace TextRender
 			{

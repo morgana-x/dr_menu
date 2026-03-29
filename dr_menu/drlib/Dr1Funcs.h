@@ -131,6 +131,22 @@ namespace DrLib
 				typedef void SetRadioVisibleFunc(char);
 				inline SetRadioVisibleFunc* SetRadioVisible = (SetRadioVisibleFunc*)(baseAddr + 0x63980);
 			}
+			namespace TextRender
+			{
+				typedef int(__cdecl* DrawText)(int layer, int posX, int posY, short character, int colorIndex);
+				inline DrawText Draw = (DrawText)(baseAddr + 0xf38e0);
+
+
+				inline void PrintString(int layer, int x, int y, const wchar_t* str, int color)
+				{
+					int currentX = x;
+					for (int i = 0; i < wcslen(str); i++)
+					{
+						int width = Draw(layer, currentX, y, (short)str[i], color);
+						currentX += width;
+					}
+				}
+			}
 		}
 	}
 };
